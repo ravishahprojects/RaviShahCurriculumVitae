@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bank Working Day Calendar</title>
+</head>
+<body>
+	<table border="0px" style="text-align: left">
+		<tr>
+			<th>Please pick a date</th>
+			<td><input id="dateToCheck" type="date"
+				onchange="checkIfWorkingDay()" /></td>
+		</tr>
+		<tr>
+			<th>Day</th>
+			<td id="dayOfMonth"></td>
+		</tr>
+		<tr>
+			<th>Month</th>
+			<td id="monthOfYear"></td>
+		</tr>
+		<tr>
+			<th>Year</th>
+			<td id="year"></td>
+		</tr>
+		<tr>
+			<th>Is it a working day ?</th>
+			<td id="isItWorkingDay" style="color: red"></td>
+		</tr>
+	</table>
+	
+	<script>
+		function checkIfWorkingDay() {
+			var customDate = document.getElementById("dateToCheck").valueAsDate;
+			document.getElementById("year").innerHTML = customDate.getYear() - 100;
+
+			var weekdays = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+			var dayName = weekdays[customDate.getDay()];
+			document.getElementById("dayOfMonth").innerHTML = customDate.getDate() + " (" + dayName + ")";
+
+			var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+			var monthName = months[customDate.getMonth()];
+			document.getElementById("monthOfYear").innerHTML = monthName;
+
+			if (dayName == 'Sunday' || dayName == 'Saturday') {
+				document.getElementById("isItWorkingDay").innerHTML = "Not a working day..";
+			} else {
+				document.getElementById("isItWorkingDay").innerHTML = "A working day..";				
+			}
+
+			var holidays = ["", ""];
+		}
+
+		document.getElementById('dateToCheck').valueAsDate = new Date();
+		checkIfWorkingDay();
+	</script>
+
+</body>
+</html>
